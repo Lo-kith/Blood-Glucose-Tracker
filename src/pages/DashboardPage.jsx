@@ -67,7 +67,16 @@ export default function DashboardPage() {
       <Header />
 
       <main className="container dashboard">
-        <DatePicker date={selectedDate} onChange={handleDateChange} />
+        <div className="dashboard-heading">
+          <div>
+            <p className="eyebrow">blood glucose tracker</p>
+            <h1>Glucose care overview</h1>
+            <p className="dashboard-subtitle">
+              Your blood glucose readings and trends, clearly organized.
+            </p>
+          </div>
+          <DatePicker date={selectedDate} onChange={handleDateChange} />
+        </div>
         <ErrorBox message={actionError || readings.error} />
 
         <div className="dashboard-columns">

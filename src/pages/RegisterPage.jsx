@@ -56,9 +56,19 @@ export default function RegisterPage() {
   return (
     <div className="auth-page">
       <main className="card auth-card">
-        <p className="auth-brand">Sweety</p>
+        <div className="auth-brand">
+          <span className="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6V3Z" />
+            </svg>
+          </span>
+          <span className="auth-brand-copy">
+            Sweety
+            <span>Patient portal</span>
+          </span>
+        </div>
         <h1>Create your account</h1>
-        <p className="auth-subtitle">A simple daily log for your glucose readings.</p>
+        <p className="auth-subtitle">Create an account to keep your glucose readings organized.</p>
 
         <ErrorBox message={error} />
 

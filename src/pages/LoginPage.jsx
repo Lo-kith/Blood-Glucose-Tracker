@@ -36,9 +36,19 @@ export default function LoginPage() {
   return (
     <div className="auth-page">
       <main className="card auth-card">
-        <p className="auth-brand">Sweety</p>
+        <div className="auth-brand">
+          <span className="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6V3Z" />
+            </svg>
+          </span>
+          <span className="auth-brand-copy">
+            Sweety
+            <span>Patient portal</span>
+          </span>
+        </div>
         <h1>Welcome back</h1>
-        <p className="auth-subtitle">Log in to track your blood glucose.</p>
+        <p className="auth-subtitle">Sign in to review your blood glucose readings.</p>
 
         {notice && (
           <p className="notice" role="status">
