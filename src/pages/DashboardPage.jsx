@@ -8,8 +8,10 @@ import ErrorBox from '../components/ErrorBox';
 import Header from '../components/Header';
 import ReadingForm from '../components/ReadingForm';
 import ReadingList from '../components/ReadingList';
+import ReadingsChart from '../components/ReadingsChart';
 import ReportCard from '../components/ReportCard';
 import useReadings from '../hooks/useReadings';
+import useReadingsRange from '../hooks/useReadingsRange';
 import useReport from '../hooks/useReport';
 import getErrorMessage from '../utils/getErrorMessage';
 import todayString from '../utils/todayString';
@@ -24,6 +26,10 @@ export default function DashboardPage() {
   const daily = useReport(getDailyReport, selectedDate, refreshKey);
   const monthToDate = useReport(getMonthToDateReport, selectedDate, refreshKey);
   const previousMonth = useReport(getPreviousMonthReport, selectedDate, refreshKey);
+
+  // Chart range: 1st of the selected month through the selected date.
+  const chartFrom = `${selectedDate.slice(0, 7)}-01`;
+  const chart = useReadingsRange(chartFrom, selectedDate, refreshKey);
 
   const refresh = () => setRefreshKey((key) => key + 1);
 
@@ -61,7 +67,16 @@ export default function DashboardPage() {
       <Header />
 
       <main className="container dashboard">
-        <DatePicker date={selectedDate} onChange={handleDateChange} />
+        <div className="dashboard-heading">
+          <div>
+            <p className="eyebrow">blood glucose tracker</p>
+            <h1>Glucose care overview</h1>
+            <p className="dashboard-subtitle">
+              Your blood glucose readings and trends, clearly organized.
+            </p>
+          </div>
+          <DatePicker date={selectedDate} onChange={handleDateChange} />
+        </div>
         <ErrorBox message={actionError || readings.error} />
 
         <div className="dashboard-columns">
@@ -101,6 +116,13 @@ export default function DashboardPage() {
             error={previousMonth.error}
           />
         </section>
+
+        <ReadingsChart
+          readings={chart.data}
+          selectedDate={selectedDate}
+          loading={chart.loading}
+          error={chart.error}
+        />
       </main>
     </div>
   );
